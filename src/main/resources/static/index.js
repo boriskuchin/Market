@@ -1,7 +1,12 @@
-angular.module('app', []).controller('indexController', function ($scope, $http) {
+angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage, $rootScope) {
     const contextPath = 'http://localhost:8189/market/api/v1/products';
     const cartPath = 'http://localhost:8189/market/api/v1/cart';
 
+    if ($localStorage.springWebUser) {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;
+    }
+
+    console.log($localStorage.springWebUser)
 
     $scope.loadProducts = function () {
         $http({
@@ -11,10 +16,19 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
 
         }).then(function (response) {
 
-                $scope.ProductList = response.data;
-            });
+            $scope.ProductList = response.data;
+        });
     };
 
+    $scope.tryToLogout = function () {
+        $scope.clearUser();
+        // $route.reload()
+    };
+
+    $scope.clearUser = function () {
+        delete $localStorage.springWebUser;
+        $http.defaults.headers.common.Authorization = '';
+    };
 
     $scope.deleteProduct = function (productID) {
         $http({
@@ -28,17 +42,30 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     };
 
+    $scope.tryToAuth = function () {
+        $http.post('http://localhost:8189/market/api/v1/auth/token', $scope.user)
+            .then(function successCallback(response) {
 
-    // $scope.addProduct = function () {
-    //     console.log($scope.newProduct);
-    //     $http.post(contextPath, $scope.newProduct)
-    //         .then(function (response) {
-    //             $scope.loadProducts();
-    //         });
-    //     $scope.newProduct = null
-    // }
-    //
-    //
+                if (response.data.token) {
+                    console.log(response.data)
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                    $localStorage.springWebUser = {username: $scope.user.username, token: response.data.token};
+
+                    $scope.user.username = null;
+                    $scope.user.password = null;
+                }
+            }, function errorCallback(response) {
+            });
+    };
+
+    $rootScope.isUserLoggedIn = function () {
+        if ($localStorage.springWebUser) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     $scope.addToCart = function (productID) {
         $http({
             url: contextPath + "/add-to-cart",
