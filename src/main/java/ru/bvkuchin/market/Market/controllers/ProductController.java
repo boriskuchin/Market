@@ -3,6 +3,7 @@ package ru.bvkuchin.market.Market.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.bvkuchin.market.Market.entities.Product;
+import ru.bvkuchin.market.Market.exceptions.ResourceNotFoundException;
 import ru.bvkuchin.market.Market.services.CartService;
 import ru.bvkuchin.market.Market.services.ProductServise;
 
@@ -17,18 +18,24 @@ public class ProductController {
     private final CartService cartServise;
 
     @GetMapping
-    public List<Product> getProducts() {
+    public List<Product> findAllProducts() {
         return productServise.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Product findById(@PathVariable Long id) {
+        Product product = productServise.findById(id).orElseThrow(() -> new ResourceNotFoundException("Продукт не найден, id: " + id));
+        return product;
     }
 
     @DeleteMapping
     public void deleteProduct(@RequestParam(name = "id") Long id) {
         productServise.deleteProductById(id);
     }
-
-    @GetMapping("/add-to-cart")
-    public void addToCart(@RequestParam Long id) {
-        cartServise.addProductInCart(id);
-
-    }
+//
+//    @GetMapping("/add-to-cart")
+//    public void addToCart(@RequestParam Long id) {
+//        cartServise.addProductInCart(id);
+//
+//    }
 }

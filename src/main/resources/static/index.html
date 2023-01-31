@@ -79,15 +79,25 @@
         <tr>
             <td>ID</td>
             <td>Наименование</td>
-            <td>Цена</td>
+            <td>Количество</td>
+            <td>Цена товара</td>
+            <td>Общая стоимость</td>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="p in CartList">
-            <td>{{p.id}}</td>
-            <td>{{p.name}}</td>
-            <td>{{p.price}}</td>
-
+        <tr ng-repeat="p in cart.items">
+            <td>{{p.productID}}</td>
+            <td>{{p.productTitle}}</td>
+            <td>{{p.quantity}}</td>
+            <td>{{p.pricePerProduct}}</td>
+            <td>{{p.pricePerProduct + ' x ' + p.quantity + ' = ' + p.price}}</td>
+        </tr>
+        <tr>
+            <td>Итого</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{cart.totalCartPrice}}</td>
         </tr>
         </tbody>
     </table>

@@ -68,11 +68,8 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
 
     $scope.addToCart = function (productID) {
         $http({
-            url: contextPath + "/add-to-cart",
+            url: cartPath + "/add/" + productID,
             method: 'GET',
-            params: {
-                id: productID
-            }
         }).then(function (response) {
             $scope.loadCart();
         });
@@ -85,7 +82,8 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             method: 'get',
 
         }).then(function (response) {
-            $scope.CartList = response.data;
+            console.log(response.data)
+            $scope.cart = response.data;
         });
     };
 
