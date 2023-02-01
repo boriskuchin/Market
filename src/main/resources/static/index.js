@@ -15,7 +15,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
 
 
         }).then(function (response) {
-
+            console.log(response.data);
             $scope.ProductList = response.data;
         });
     };
@@ -75,6 +75,25 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         });
     };
 
+    $scope.deceraseProductQuantity = function (productID) {
+        $http({
+            url: cartPath + "/decrease/" + productID,
+            method: 'GET',
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    };
+
+    $scope.removeProductFromCart = function (productID) {
+        $http({
+            url: cartPath + "/remove/" + productID,
+            method: 'GET',
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    };
+
+
 
     $scope.loadCart = function () {
         $http({
@@ -85,7 +104,21 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             console.log(response.data)
             $scope.cart = response.data;
         });
-    };
+    }
+
+    $scope.clearCart = function () {
+        $http({
+            url: cartPath +  "/clear",
+            method: 'get',
+
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    }
+
+
+
+
 
 
     $scope.loadProducts();

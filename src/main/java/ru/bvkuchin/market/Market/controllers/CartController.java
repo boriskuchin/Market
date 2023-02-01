@@ -23,6 +23,23 @@ public class CartController {
     @GetMapping("/add/{id}")
     public void add(@PathVariable Long id) {
         cartServise.addProductInCart(id);
-
     }
+
+    @GetMapping("/decrease/{id}")
+    public void decrease(@PathVariable Long id) {
+        cartServise.decreaseProductQuantityInCart(id);
+    }
+
+    @GetMapping("/clear")
+    public void clearCart() {
+        cartServise.clearCart();
+    }
+
+    @GetMapping("/remove/{id}")
+    public void removeProductFromCart(@PathVariable Long id) {
+        cartServise.removeProductFromCart(id);
+    }
+
+
+
 }

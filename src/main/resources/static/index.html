@@ -61,7 +61,7 @@
         <tbody>
         <tr ng-repeat="p in ProductList">
             <td>{{p.id}}</td>
-            <td>{{p.name}}</td>
+            <td>{{p.title}}</td>
             <td>{{p.price}}</td>
             <td>
                 <button class="btn btn-outline-danger btn-sm" ng-click="deleteProduct(p.id)">Удалить</button>
@@ -82,25 +82,33 @@
             <td>Количество</td>
             <td>Цена товара</td>
             <td>Общая стоимость</td>
+            <td>Действие</td>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="p in cart.items">
             <td>{{p.productID}}</td>
             <td>{{p.productTitle}}</td>
-            <td>{{p.quantity}}</td>
+            <td> <button class="btn btn-outline-primary btn-sm" ng-click="deceraseProductQuantity(p.productID)">-</button>
+                {{p.quantity}}
+                <button class="btn btn-outline-primary btn-sm" ng-click="addToCart(p.productID)">+</button>
+            </td>
             <td>{{p.pricePerProduct}}</td>
-            <td>{{p.pricePerProduct + ' x ' + p.quantity + ' = ' + p.price}}</td>
+            <td>{{p.pricePerProduct + ' x ' + p.quantity + ' = ' + p.price * p.quantity}}</td>
+            <td> <button class="btn btn-outline-danger btn-sm" ng-click="removeProductFromCart(p.productID)">Удалить</button> </td>
         </tr>
+
         <tr>
             <td>Итого</td>
             <td></td>
             <td></td>
             <td></td>
             <td>{{cart.totalCartPrice}}</td>
+            <td></td>
         </tr>
         </tbody>
     </table>
+    <button class="btn btn-outline-primary btn-sm" ng-click="clearCart()">Очистить корзину</button>
 
 </div>
 </body>

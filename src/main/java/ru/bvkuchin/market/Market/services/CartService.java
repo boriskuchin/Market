@@ -30,7 +30,19 @@ public class CartService {
     public void addProductInCart(Long productId) {
         Product product = productServise.findById(productId).orElseThrow((() -> new ResourceNotFoundException("Не удается добавить продукт с id: " + productId + " в корзину. Продукт не найден")));
         cart.add(product);
-
     }
 
+    public void decreaseProductQuantityInCart(Long productId) {
+        Product product = productServise.findById(productId).orElseThrow((() -> new ResourceNotFoundException("Не удается уменьшить количество продукта с id: " + productId + " в корзину. Продукт не найден")));
+        cart.decreaseQuantity(product);
+    }
+
+    public void clearCart() {
+        cart.clearCart();
+    }
+
+    public void removeProductFromCart(Long productId) {
+        Product product = productServise.findById(productId).orElseThrow((() -> new ResourceNotFoundException("Не удается удалить продукт с id: " + productId + " в корзину. Продукт не найден")));
+        cart.removeProductFromCart(product);
+    }
 }

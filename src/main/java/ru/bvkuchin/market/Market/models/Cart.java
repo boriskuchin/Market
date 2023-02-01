@@ -23,16 +23,50 @@ public class Cart {
     }
 
     public void add(Product product) {
+        CartItem cartItem = new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice());
 
-        // FIXME: 01.02.2023 заменить, чтобы не даблились строки (на map)
-        items.add(new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice()));
+        if (items.contains(cartItem)) {
+            CartItem existedItem = items.get(items.indexOf(cartItem));
+            existedItem.setQuantity(existedItem.getQuantity() + 1);
+        } else {
+            items.add(cartItem);
+        }
+        recalculate();
+    }
+
+    public void decreaseQuantity(Product product) {
+        CartItem cartItem = new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice());
+
+        if (items.contains(cartItem)) {
+            CartItem existedItem = items.get(items.indexOf(cartItem));
+            if (existedItem.getQuantity() > 1) {
+                existedItem.setQuantity(existedItem.getQuantity() - 1);
+            }
+        }
         recalculate();
     }
 
     private void recalculate() {
         totalCartPrice = 0d;
         for (CartItem item : items) {
-            totalCartPrice += item.getPrice();
+            totalCartPrice += item.getPrice()*item.getQuantity();
         }
     }
+
+    public void clearCart() {
+        items.clear();
+        recalculate();
+    }
+
+    public void removeProductFromCart(Product product) {
+        CartItem cartItem = new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice());
+
+        if (items.contains(cartItem)) {
+            CartItem existedItem = items.get(items.indexOf(cartItem));
+            items.remove(existedItem);
+        }
+        recalculate();
+    }
+
+
 }
