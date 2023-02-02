@@ -27,7 +27,7 @@ public class Cart {
         if (items.contains(cartItem)) {
             CartItem existedItem = items.get(items.indexOf(cartItem));
             existedItem.setQuantity(existedItem.getQuantity() + 1);
-            existedItem.setPrice(existedItem.getPricePerProduct()*existedItem.getQuantity());
+            existedItem.recalculatePrice();
         } else {
             items.add(cartItem);
         }

@@ -28,4 +28,8 @@ public class CartItem {
     public int hashCode() {
         return Objects.hash(getProductID());
     }
+
+    public void recalculatePrice() {
+        price = pricePerProduct * quantity;
+    }
 }
