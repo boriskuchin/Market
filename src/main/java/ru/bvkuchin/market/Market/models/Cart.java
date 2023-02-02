@@ -42,6 +42,7 @@ public class Cart {
             CartItem existedItem = items.get(items.indexOf(cartItem));
             if (existedItem.getQuantity() > 1) {
                 existedItem.setQuantity(existedItem.getQuantity() - 1);
+                existedItem.recalculatePrice();
             }
         }
         recalculate();
