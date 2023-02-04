@@ -37,7 +37,6 @@ public class Cart {
 
     public void decreaseQuantity(Product product) {
         CartItem cartItem = new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice());
-
         if (items.contains(cartItem)) {
             CartItem existedItem = items.get(items.indexOf(cartItem));
             if (existedItem.getQuantity() > 1) {
