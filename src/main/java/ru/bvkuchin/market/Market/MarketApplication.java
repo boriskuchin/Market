@@ -7,13 +7,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import ru.bvkuchin.market.Market.services.CartService;
 
 @SpringBootApplication
-@EnableAspectJAutoProxy
+//@EnableAspectJAutoProxy
 public class MarketApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(MarketApplication.class, args);
-
-
 	}
 
 }
