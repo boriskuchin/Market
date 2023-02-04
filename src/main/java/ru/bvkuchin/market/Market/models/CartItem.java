@@ -15,7 +15,7 @@ public class CartItem {
     private String productTitle;
     private Integer quantity;
     private Double pricePerProduct;
-    private Double price;
+    private Double totalPrice;
 
     @Override
     public boolean equals(Object o) {
@@ -30,6 +30,18 @@ public class CartItem {
     }
 
     public void recalculatePrice() {
-        price = pricePerProduct * quantity;
+        totalPrice = pricePerProduct * quantity;
+    }
+
+    public void increaseQuantity() {
+        this.quantity++;
+        recalculatePrice();
+    }
+
+    public void decreaseQuantity() {
+        if (this.quantity > 1) {
+            this.quantity--;
+        }
+        recalculatePrice();
     }
 }

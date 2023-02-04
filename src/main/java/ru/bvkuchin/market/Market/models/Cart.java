@@ -24,41 +24,35 @@ public class Cart {
         return Collections.unmodifiableList(items);
     }
 
-    public void add(Product product) {
-        CartItem cartItem = new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice());
-        if (items.contains(cartItem)) {
-            CartItem existedItem = items.get(items.indexOf(cartItem));
-            existedItem.setQuantity(existedItem.getQuantity() + 1);
-            existedItem.recalculatePrice();
-        } else {
-            items.add(cartItem);
-        }
-
-        recalculate();
-    }
-
-    public void decreaseQuantity(Product product) {
-        CartItem cartItem = new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice());
-        if (items.contains(cartItem)) {
-            CartItem existedItem = items.get(items.indexOf(cartItem));
-            if (existedItem.getQuantity() > 1) {
-                existedItem.setQuantity(existedItem.getQuantity() - 1);
-                existedItem.recalculatePrice();
+    public void addOrChangeQuantity(Product product, Integer delta) {
+        for (CartItem cartItem : items) {
+            if (cartItem.getProductID().equals(product.getId())) {
+                if (delta >= 0) {
+                    cartItem.increaseQuantity();
+                    recalculate();
+                    return;
+                } else {
+                    cartItem.decreaseQuantity();
+                    recalculate();
+                    return;
+                }
             }
         }
+
+        items.add(new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice()));
         recalculate();
     }
 
     private void recalculate() {
         totalCartPrice = 0d;
         for (CartItem item : items) {
-            totalCartPrice += item.getPrice()*item.getQuantity();
+            totalCartPrice += item.getTotalPrice();
         }
     }
 
     public void clearCart() {
         items.clear();
-        recalculate();
+        totalCartPrice = 0d;
     }
 
     public void removeProductFromCart(Product product) {

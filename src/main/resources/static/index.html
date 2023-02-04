@@ -94,7 +94,7 @@
                 <button class="btn btn-outline-primary btn-sm" ng-click="addToCart(p.productID)">+</button>
             </td>
             <td>{{p.pricePerProduct}}</td>
-            <td>{{p.pricePerProduct + ' x ' + p.quantity + ' = ' + p.price * p.quantity}}</td>
+            <td>{{p.pricePerProduct + ' x ' + p.quantity + ' = ' + p.totalPrice}}</td>
             <td> <button class="btn btn-outline-danger btn-sm" ng-click="removeProductFromCart(p.productID)">Удалить</button> </td>
         </tr>
 
