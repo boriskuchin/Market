@@ -1,6 +1,7 @@
 package ru.bvkuchin.market.Market.models;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import ru.bvkuchin.market.Market.entities.Product;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Data
+@Slf4j
 public class Cart {
 
     private List<CartItem> items;
