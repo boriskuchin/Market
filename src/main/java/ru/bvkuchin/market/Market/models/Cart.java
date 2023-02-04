@@ -24,23 +24,24 @@ public class Cart {
 
     public void add(Product product) {
         CartItem cartItem = new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice());
-
         if (items.contains(cartItem)) {
             CartItem existedItem = items.get(items.indexOf(cartItem));
             existedItem.setQuantity(existedItem.getQuantity() + 1);
+            existedItem.recalculatePrice();
         } else {
             items.add(cartItem);
         }
+
         recalculate();
     }
 
     public void decreaseQuantity(Product product) {
         CartItem cartItem = new CartItem(product.getId(), product.getName(), 1, product.getPrice(), product.getPrice());
-
         if (items.contains(cartItem)) {
             CartItem existedItem = items.get(items.indexOf(cartItem));
             if (existedItem.getQuantity() > 1) {
                 existedItem.setQuantity(existedItem.getQuantity() - 1);
+                existedItem.recalculatePrice();
             }
         }
         recalculate();
