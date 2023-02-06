@@ -1,6 +1,20 @@
 angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage, $rootScope) {
     const contextPath = 'http://localhost:8189/market/api/v1/products';
     const cartPath = 'http://localhost:8189/market/api/v1/cart';
+    const orderPath = 'http://localhost:8189/market/api/v1/order';
+
+
+    $scope.createOrder = function () {
+        $http({
+            url: orderPath,
+            method: 'POST',
+        }).then(function (response) {
+            alert("Заказ создан")
+            $scope.loadCart();
+        });
+    };
+
+
 
     if ($localStorage.springWebUser) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;

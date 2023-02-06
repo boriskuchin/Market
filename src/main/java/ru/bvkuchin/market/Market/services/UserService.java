@@ -24,14 +24,13 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", username)));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToGrantedAuthorities(user.getRoles()));
     }
 
-    private Optional<User> findByUsername (String username) {
+    public Optional<User> findByUsername (String username) {
         return userRepository.findUserByUsername(username);
     }
 
