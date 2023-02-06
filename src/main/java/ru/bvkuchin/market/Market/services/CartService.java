@@ -3,6 +3,7 @@ package ru.bvkuchin.market.Market.services;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.bvkuchin.market.Market.aspects.Timer;
 import ru.bvkuchin.market.Market.entities.Product;
 import ru.bvkuchin.market.Market.exceptions.ResourceNotFoundException;
 import ru.bvkuchin.market.Market.models.Cart;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Timer
 public class CartService {
 
     private Cart cart;
@@ -27,14 +29,18 @@ public class CartService {
         return cart;
     }
 
+
     public void addProductInCart(Long productId) {
         Product product = productServise.findById(productId).orElseThrow((() -> new ResourceNotFoundException("Не удается добавить продукт с id: " + productId + " в корзину. Продукт не найден")));
-        cart.add(product);
+//        cart.add(product);
+        cart.addOrChangeQuantity(product, 1);
     }
 
     public void decreaseProductQuantityInCart(Long productId) {
         Product product = productServise.findById(productId).orElseThrow((() -> new ResourceNotFoundException("Не удается уменьшить количество продукта с id: " + productId + " в корзину. Продукт не найден")));
-        cart.decreaseQuantity(product);
+//        cart.decreaseQuantity(product);
+        cart.addOrChangeQuantity(product, -1);
+
     }
 
     public void clearCart() {
