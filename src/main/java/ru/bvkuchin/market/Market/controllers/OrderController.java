@@ -1,12 +1,9 @@
 package ru.bvkuchin.market.Market.controllers;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import ru.bvkuchin.market.Market.dtos.TextResponseTDO;
-import ru.bvkuchin.market.Market.security.AuthResponseDTO;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.bvkuchin.market.Market.services.OrderService;
 
 import java.security.Principal;
