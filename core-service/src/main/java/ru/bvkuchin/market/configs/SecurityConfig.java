@@ -26,7 +26,6 @@ public class SecurityConfig {
                 .cors().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/cart/**").authenticated()
-                .requestMatchers("/api/v1/products/**").authenticated()
                 .requestMatchers("/**").permitAll()
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .and()

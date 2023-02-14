@@ -1,4 +1,4 @@
-package ru.bvkuchin.market.exceptions;
+package ru.bvkuchin.intergation.dtos;
 
 public class ResourceNotFoundException extends RuntimeException {
 

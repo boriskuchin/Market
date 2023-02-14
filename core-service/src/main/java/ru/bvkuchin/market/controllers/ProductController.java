@@ -2,9 +2,10 @@ package ru.bvkuchin.market.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.bvkuchin.market.dtos.ProductDto;
+import ru.bvkuchin.intergation.dtos.ProductDto;
+import ru.bvkuchin.intergation.dtos.ResourceNotFoundException;
+import ru.bvkuchin.market.converters.ProductConverter;
 import ru.bvkuchin.market.entities.Product;
-import ru.bvkuchin.market.exceptions.ResourceNotFoundException;
 import ru.bvkuchin.market.services.ProductServise;
 
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private final ProductServise productServise;
+    private final ProductConverter productConverter;
+
 
     @GetMapping
     public List<ProductDto> findAllProducts() {
@@ -23,9 +26,9 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product findById(@PathVariable Long id) {
+    public ProductDto findById(@PathVariable Long id) {
         Product product = productServise.findById(id).orElseThrow(() -> new ResourceNotFoundException("Продукт не найден, id: " + id));
-        return product;
+        return productConverter.entityToDto(product);
     }
 
     @DeleteMapping

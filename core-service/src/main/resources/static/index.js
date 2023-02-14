@@ -1,12 +1,13 @@
 angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage, $rootScope) {
     const contextPath = 'http://localhost:8189/market/api/v1/products';
-    const cartPath = 'http://localhost:8189/market/api/v1/cart';
-    const orderPath = 'http://localhost:8189/market/api/v1/order';
-
+    const orderPath = 'http://localhost:8191/market-orders/api/v1/order';
+    const cartPath = 'http://localhost:8190/market-carts/api/v1/cart';
 
     $scope.createOrder = function () {
+        alert($scope.user.username);
         $http({
-            url: orderPath,
+            url: orderPath + '/' + $scope.user.username,
+
             method: 'POST',
         }).then(function (response) {
             alert("Заказ создан")
@@ -78,7 +79,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     $localStorage.springWebUser = {username: $scope.user.username, token: response.data.token};
 
-                    $scope.user.username = null;
+                    // $scope.user.username = null;
                     $scope.user.password = null;
                 }
             }, function errorCallback(response) {

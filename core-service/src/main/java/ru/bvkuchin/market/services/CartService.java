@@ -3,13 +3,10 @@ package ru.bvkuchin.market.services;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.bvkuchin.intergation.dtos.ResourceNotFoundException;
 import ru.bvkuchin.market.aspects.Timer;
 import ru.bvkuchin.market.entities.Product;
-import ru.bvkuchin.market.exceptions.ResourceNotFoundException;
 import ru.bvkuchin.market.models.Cart;
-
-import java.util.Collections;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

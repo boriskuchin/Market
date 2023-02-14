@@ -2,15 +2,14 @@ package ru.bvkuchin.market.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.bvkuchin.intergation.dtos.ResourceNotFoundException;
 import ru.bvkuchin.market.entities.Product;
-import ru.bvkuchin.market.exceptions.ResourceNotFoundException;
 import ru.bvkuchin.market.repositories.ProductRepository;
 import ru.bvkuchin.market.soap.products.ProductSoap;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
