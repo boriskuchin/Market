@@ -19,7 +19,6 @@ public class IntegrationService {
 
     public Optional<PrincipalDto> getPrincipalDto(String username) {
         Optional<PrincipalDto> principalDto = Optional.ofNullable(restTemplate.getForObject("http://localhost:8189/market/api/v1/auth/user-info/" + username, PrincipalDto.class));
-        System.out.println(principalDto.get().getName());
         return principalDto;
     }
 
