@@ -22,6 +22,7 @@ import java.security.Principal;
 @RequestMapping("/api/v1/auth")
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AuthController {
     private final UserService userService;
 

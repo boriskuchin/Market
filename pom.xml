@@ -22,7 +22,8 @@
         <module>cart-service</module>
 		<module>integration-service</module>
         <module>order-service</module>
-    </modules>
+		<module>front-service</module>
+	</modules>
 
 	<properties>
 		<java.version>19</java.version>
