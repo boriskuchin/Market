@@ -1,8 +1,9 @@
-package ru.bvkuchin.market.security;
+package ru.bvkuchin.authservice.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,10 +18,14 @@ import java.util.stream.Collectors;
 @Component
 public class JwtService {
 
-    private final long EXPIRATION_TIME = 36000000;
-    private final String SECRET = "secretdofvndsfojvuhsd123123";
+    @Value(value = "${jwt.lifetime}")
+    private String EXPIRATION_TIME_STR;// = 1000 * 60 * 10;
+
+    @Value(value = "${jwt.secret}")
+    private String SECRET;// = "lsdkcniuenfxie7f734pr734yxnpehfh";
 
     public String generateToken(UserDetails userDetails) {
+        Long EXPIRATION_TIME = Long.parseLong(EXPIRATION_TIME_STR);
         String userName = userDetails.getUsername();
 
         List<String> authorities = userDetails

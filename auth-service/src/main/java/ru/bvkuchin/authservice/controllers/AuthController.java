@@ -1,22 +1,19 @@
-package ru.bvkuchin.market.controllers;
+package ru.bvkuchin.authservice.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import ru.bvkuchin.authservice.entities.User;
+import ru.bvkuchin.authservice.services.UserService;
+import ru.bvkuchin.authservice.utils.JwtService;
+import ru.bvkuchin.intergation.dtos.AuthRequestDTO;
+import ru.bvkuchin.intergation.dtos.AuthResponseDTO;
 import ru.bvkuchin.intergation.dtos.PrincipalDto;
 import ru.bvkuchin.intergation.dtos.ResourceNotFoundException;
-import ru.bvkuchin.market.entities.User;
-import ru.bvkuchin.market.security.AuthRequestDTO;
-import ru.bvkuchin.market.security.AuthResponseDTO;
-import ru.bvkuchin.market.security.JwtService;
-import ru.bvkuchin.market.services.UserService;
-
-import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/auth")

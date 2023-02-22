@@ -23,7 +23,9 @@
 		<module>integration-service</module>
         <module>order-service</module>
 		<module>front-service</module>
-	</modules>
+		<module>auth-service</module>
+        <module>gateway-service</module>
+    </modules>
 
 	<properties>
 		<java.version>19</java.version>

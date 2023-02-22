@@ -11,7 +11,7 @@ import ru.bvkuchin.market.cartservice.services.CartService;
 @RestController
 @RequestMapping("/api/v1/cart")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @Slf4j
 public class CartController {
 

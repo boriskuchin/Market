@@ -1,11 +1,11 @@
 server:
-  port: 8189
+  port: 8193
   servlet:
-    context-path: /market-core
+    context-path: /market-auth
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:mydb;MODE=PostgreSQL
+    url: jdbc:h2:file:./users;MODE=PostgreSQL
     username: sa
     password:
   jpa:
@@ -18,6 +18,6 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
-logging:
-  level:
-    root: info
+jwt:
+  secret: secretdofvndsfojvuhsd123123
+  lifetime: 36000000
