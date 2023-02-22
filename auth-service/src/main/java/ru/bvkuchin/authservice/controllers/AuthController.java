@@ -19,7 +19,7 @@ import ru.bvkuchin.intergation.dtos.ResourceNotFoundException;
 @RequestMapping("/api/v1/auth")
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class AuthController {
     private final UserService userService;
 

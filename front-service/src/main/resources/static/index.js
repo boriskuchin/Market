@@ -1,8 +1,8 @@
 angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage, $rootScope) {
-    const contextPath = 'http://localhost:8189/market/api/v1/products';
-    const orderPath = 'http://localhost:8191/market-orders/api/v1/order';
-    const cartPath = 'http://localhost:8190/market-carts/api/v1/cart';
-    const authPath = 'http://localhost:8193/market-auth/api/v1/auth'
+    const contextPath = 'http://localhost:5555/core/api/v1/products';
+    const orderPath = 'http://localhost:5555/order/api/v1/order';
+    const cartPath = 'http://localhost:5555/cart/api/v1/cart';
+    const authPath = 'http://localhost:5555/auth/api/v1/auth'
 
     $scope.createOrder = function () {
         alert($scope.user.username);

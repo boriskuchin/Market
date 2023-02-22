@@ -24,7 +24,8 @@
         <module>order-service</module>
 		<module>front-service</module>
 		<module>auth-service</module>
-	</modules>
+        <module>gateway-service</module>
+    </modules>
 
 	<properties>
 		<java.version>19</java.version>
