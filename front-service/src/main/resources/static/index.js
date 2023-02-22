@@ -2,6 +2,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     const contextPath = 'http://localhost:8189/market/api/v1/products';
     const orderPath = 'http://localhost:8191/market-orders/api/v1/order';
     const cartPath = 'http://localhost:8190/market-carts/api/v1/cart';
+    const authPath = 'http://localhost:8193/market-auth/api/v1/auth'
 
     $scope.createOrder = function () {
         alert($scope.user.username);
@@ -71,7 +72,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     };
 
     $scope.tryToAuth = function () {
-        $http.post('http://localhost:8189/market/api/v1/auth/token', $scope.user)
+        $http.post( authPath + '/token', $scope.user)
             .then(function successCallback(response) {
 
                 if (response.data.token) {
